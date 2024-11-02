@@ -8,35 +8,33 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class FoodRecommendResponse {
 
-    @Schema(description = "레시피 제목", example = "김치볶음밥")
-    @JsonProperty("제목")
-    private String title;
-
-    @Schema(description = "재료 목록", example = "[\"김치\", \"쌀\", \"계란\"]")
-    @JsonProperty("재료")
-    private List<String> ingredients;
-
-    @Schema(description = "요리법", example = "1. 팬에 기름을 두르고 김치를 볶는다...")
-    @JsonProperty("요리법")
+    @Schema(description = "레시피 제목", example = "김치찌개")
+    @JsonProperty("Recipe")
     private String recipe;
 
-    @Schema(description = "조리 시간", example = "10분")
-    @JsonProperty("시간")
+    @Schema(description = "재료 목록", example = "김치 1컵, 돼지고기 100g, 양파 1/2개, 대파 1/2대, 물 2컵, 두부 1/2모, 다진 마늘 1큰술, 고춧가루 1큰술, 소금 약간")
+    @JsonProperty("Ingredients")
+    private String ingredients;
+
+    @Schema(description = "요리법", example = "1. 돼지고기를 냄비에 넣고 볶는다...")
+    @JsonProperty("Instructions")
+    private String instructions;
+
+    @Schema(description = "조리 시간", example = "20분")
+    @JsonProperty("Time")
     private String time;
 
     @Schema(description = "난이도", example = "쉬움")
-    @JsonProperty("난이도")
+    @JsonProperty("Difficulty")
     private String difficulty;
 
     @Schema(description = "사진 URL", example = "https://example.com/kimchi_fried_rice.jpg")
-    @JsonProperty("사진URL")
+    @JsonProperty("ImageUrl")
     private String imageUrl;
 }

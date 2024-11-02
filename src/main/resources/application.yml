@@ -1,8 +1,8 @@
 spring:
-#  application:
-#    name: unidthon
+  #  application:
+  #    name: unidthon
   config:
-      import: optional:file:.env[.properties]
+    import: optional:file:.env[.properties]
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${DATABASE_ENDPOINT}:3306/${DATABASE_SCHEMA}
@@ -10,12 +10,13 @@ spring:
     password: ${DATABASE_PASSWORD}
   jpa:
     hibernate:
-#      ddl-auto: create-drop
+#      ddl-auto: create
       ddl-auto: update
     properties:
       hibernate:
         show-sql: true
         format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
 springdoc:
   api-docs:
