@@ -16,10 +16,10 @@ Uni-DTHON TEAM 13입니다.
       <a href="https://github.com/marudevelop"><img src="https://avatars.githubusercontent.com/u/105143258?v=4" style="max-width: 100%;"></a>
     </td>
     <td align="center" width="130px">
-      <a href="https://github.com/"><img src="https://avatars.githubusercontent.com/u/105143258?v=4" style="max-width: 100%;"></a>
+      <a href="https://github.com/minzix"><img src="https://avatars.githubusercontent.com/u/126869805?v=4" style="max-width: 100%;"></a>
     </td>
     <td align="center" width="130px">
-      <a href="https://github.com/hyeonseo"><img src="https://avatars.githubusercontent.com/u/15334772?v=4" style="max-width: 100%;"></a>
+      <a href="https://github.com/gustj3104"><img src="https://avatars.githubusercontent.com/u/128580251?v=4" style="max-width: 100%;"></a>
     </td>
     <td align="center" width="130px">
       <a href="https://github.com/easyhak"><img src="https://avatars.githubusercontent.com/u/48908552?v=4" style="max-width: 100%;"></a>
@@ -33,10 +33,10 @@ Uni-DTHON TEAM 13입니다.
       <a href="https://github.com/marudevelop">김민성</a>
     </td>
     <td align="center" width="130px">
-      <a href="https://github.com/">김민지</a>
+      <a href="https://github.com/minzix">김민지</a>
     </td>
     <td align="center" width="130px">
-      <a href="https://github.com/hyeonseo">윤현서</a>
+      <a href="https://github.com/gustj3104">윤현서</a>
     </td>
     <td align="center" width="130px">
       <a href="https://github.com/easyhak">이지학</a>
