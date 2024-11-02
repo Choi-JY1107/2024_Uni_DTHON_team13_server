@@ -1,4 +1,4 @@
-package Image;
+package com.example.unidthon.Image;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;

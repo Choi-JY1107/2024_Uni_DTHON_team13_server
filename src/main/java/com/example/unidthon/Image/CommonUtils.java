@@ -1,4 +1,4 @@
-package Image;
+package com.example.unidthon.Image;
 
 public class CommonUtils {
     public static final String FILE_EXTENSION_SEPARATOR = ".";

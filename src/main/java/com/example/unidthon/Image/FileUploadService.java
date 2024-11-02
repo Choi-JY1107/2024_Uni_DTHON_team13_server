@@ -1,4 +1,4 @@
-package Image;
+package com.example.unidthon.Image;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;

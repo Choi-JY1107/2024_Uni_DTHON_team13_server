@@ -1,4 +1,4 @@
-package Image;
+package com.example.unidthon.Image;
 
 public enum ApplicationError {
     FILE_NOT_EXIST;
