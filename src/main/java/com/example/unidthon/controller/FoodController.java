@@ -44,7 +44,7 @@ public class FoodController {
     @PostMapping
     public String saveFood(@RequestBody FoodFormRequest foodFormRequest) {
         Food food = new Food(
-                foodFormRequest.getId(),
+                null,
                 foodFormRequest.getName(),
                 foodFormRequest.getExpiryDate(),
                 foodFormRequest.getPurchaseDate(),

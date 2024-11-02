@@ -18,10 +18,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class FoodFormRequest {
 
-    @NotNull(message = "ID는 필수 값입니다.")
-    @JsonProperty("id")
-    private Long id;
-
     @NotNull(message = "이름은 필수 값입니다.")
     @Size(min = 1, max = 50, message = "이름은 1자에서 50자 사이여야 합니다.")
     @JsonProperty("name")
