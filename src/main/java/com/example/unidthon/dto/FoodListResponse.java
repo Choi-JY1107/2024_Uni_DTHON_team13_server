@@ -1,6 +1,9 @@
 package com.example.unidthon.dto;
 
 import com.example.unidthon.entity.Food;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -9,7 +12,8 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Getter
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FoodListResponse {
 
     @Schema(description = "음식 이름", example = "Apple")
@@ -27,13 +31,11 @@ public class FoodListResponse {
     @Schema(description = "이미지 URL", example = "http://example.com/image.jpg")
     private String imageUrl;
 
-    public static FoodListResponse toFoodList(Food food) {
-        return FoodListResponse.builder()
-                .name(food.getName())
-                .expiryDate(food.getExpiryDate())
-                .purchaseDate(food.getPurchaseDate())
-                .price(food.getPrice())
-                .imageUrl(food.getFoodImage() != null ? food.getFoodImage().getFoodImageURL() : null)
-                .build();
+    public FoodListResponse(Food food) {
+        this.name = food.getName();
+        this.expiryDate = food.getExpiryDate();
+        this.purchaseDate = food.getPurchaseDate();
+        this.price = food.getPrice();
+        this.imageUrl = food.getFoodImage() != null ? food.getFoodImage().getFoodImageURL() : null;
     }
 }
