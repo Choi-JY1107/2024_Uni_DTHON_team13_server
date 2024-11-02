@@ -1,6 +1,12 @@
 spring:
   application:
     name: unidthon
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DATABASE_ENDPOINT}:3306//uniD
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
 
 springdoc:
   api-docs:
