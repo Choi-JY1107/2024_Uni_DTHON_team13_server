@@ -19,7 +19,7 @@ public class FoodListResponse {
                 .expiryDate(food.getExpiryDate())
                 .purchaseDate(food.getPurchaseDate())
                 .price(food.getPrice())
-                .imageUrl(food.getImageUrl())
+                .imageUrl(food.getFoodImage() != null ? food.getFoodImage().getFoodImageURL() : null)
                 .build();
     }
 }

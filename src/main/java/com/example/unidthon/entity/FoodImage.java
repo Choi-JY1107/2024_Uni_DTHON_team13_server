@@ -1,14 +1,18 @@
 package com.example.unidthon.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class FoodImage {
     @Id
-    private Long image_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long imageId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_id")
@@ -16,8 +20,9 @@ public class FoodImage {
 
     private String foodImageURL;
 
-    public FoodImage(Long image_id, Food food, String foodImageURL) {
-        this.image_id = image_id;
+    @Builder
+    public FoodImage(Long imageId, Food food, String foodImageURL) {
+        this.imageId = imageId;
         this.food = food;
         this.foodImageURL = foodImageURL;
     }

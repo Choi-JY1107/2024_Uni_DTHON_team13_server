@@ -12,10 +12,8 @@ import java.util.Optional;
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Long> {
 
-    @Query("SELECT i FROM FoodImage i WHERE i.food_id = :food_id")
+    @Query("SELECT fi FROM FoodImage fi WHERE fi.food.id = :id")
     Optional<FoodImage> findByFoodId(Long id);
-
-    Optional<Food> findById(Long id);
 
     @Query("SELECT f FROM Food f")
     List<Food> findAll();

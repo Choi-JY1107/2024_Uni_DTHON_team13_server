@@ -13,21 +13,21 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 public class Food {
-    @Id @Column(name = "food_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "food_id")
     private Long id;
 
     private String name;
 
-    // 유통기한
     private LocalDate expiryDate;
 
-    // 구매날짜
     private LocalDate purchaseDate;
 
     private int price;
 
-    @OneToOne(mappedBy = "image_id")
-    private String imageUrl;
+    @OneToOne(mappedBy = "food")
+    private FoodImage foodImage;
 
     @Builder
     public Food(Long id, String name, LocalDate expiryDate, LocalDate purchaseDate, int price) {

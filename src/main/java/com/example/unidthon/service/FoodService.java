@@ -35,7 +35,7 @@ public class FoodService {
                 .orElseThrow(() -> new IllegalArgumentException());
 
         // food id로 이미지 조회
-        FoodImage foodImage = foodImageRepository.findByFoodId(id)
+        FoodImage foodImage = foodImageRepository.findByFood(foodRepository.findById(id).orElseThrow(() -> new IllegalArgumentException()))
                 .orElseThrow(() -> new IllegalArgumentException());
         // imageURL 저장
         String imageURL = foodImage.getFoodImageURL();
