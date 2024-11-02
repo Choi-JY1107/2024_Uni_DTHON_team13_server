@@ -27,3 +27,15 @@ springdoc:
     path: /swagger-ui.html
     disable-swagger-default-url: true
     doc-expansion: none
+
+cloud:
+  aws:
+    s3:
+      bucket: ${BUCKET_NAME}
+    credentials:
+      access-key: ${BUCKET_ACCESS_KEY}
+      secret-key: ${BUCKET_SECRET_KEY}
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
