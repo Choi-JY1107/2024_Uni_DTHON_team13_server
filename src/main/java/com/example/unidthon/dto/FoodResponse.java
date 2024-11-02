@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodResponseDto {
+public class FoodResponse {
 
     @Schema(description = "음식 이름", example = "Apple")
     private String name;
@@ -29,7 +29,7 @@ public class FoodResponseDto {
     @Schema(description = "이미지 URL", example = "http://example.com/image.jpg")
     private String imageUrl;
 
-    public FoodResponseDto(String imageUrl, Food food) {
+    public FoodResponse(String imageUrl, Food food) {
         this.name = food.getName();
         this.expiryDate = food.getExpiryDate();
         this.purchaseDate = food.getPurchaseDate();

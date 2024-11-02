@@ -2,7 +2,7 @@ package com.example.unidthon.service;
 
 import com.example.unidthon.dto.FoodListResponse;
 import com.example.unidthon.dto.FoodRecommendResponse;
-import com.example.unidthon.dto.FoodResponseDto;
+import com.example.unidthon.dto.FoodResponse;
 import com.example.unidthon.entity.Food;
 import com.example.unidthon.entity.FoodImage;
 import com.example.unidthon.repository.FoodImageRepository;
@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +33,7 @@ public class FoodService {
     }
 
     // ID로 특정 음식 조회
-    public FoodResponseDto getFoodById(Long id) {
+    public FoodResponse getFoodById(Long id) {
 
         Food food = foodMockRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("음식을 찾지 못했습니다. " + id));
@@ -43,7 +42,7 @@ public class FoodService {
 
         String imageUrl = foodImage != null ? foodImage.getFoodImageURL() : null;
 
-        return new FoodResponseDto(food.getName(), food.getExpiryDate(), food.getPurchaseDate(), food.getPrice(),
+        return new FoodResponse(food.getName(), food.getExpiryDate(), food.getPurchaseDate(), food.getPrice(),
                 imageUrl);
     }
 

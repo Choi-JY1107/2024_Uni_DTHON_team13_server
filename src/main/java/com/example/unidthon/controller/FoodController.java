@@ -1,14 +1,20 @@
 package com.example.unidthon.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.unidthon.dto.FoodFormRequest;
 import com.example.unidthon.dto.FoodListResponse;
 import com.example.unidthon.dto.FoodRecommendResponse;
-import com.example.unidthon.dto.FoodResponseDto;
+import com.example.unidthon.dto.FoodResponse;
 import com.example.unidthon.entity.Food;
 import com.example.unidthon.service.FoodService;
-
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -30,13 +36,21 @@ public class FoodController {
 
     @Operation(summary = "특정 ID의 음식 조회", description = "특정 ID에 해당하는 음식을 조회합니다.")
     @GetMapping("/{id}")
-    public FoodResponseDto getFoodById(@PathVariable Long id) {
+    public FoodResponse getFoodById(@PathVariable Long id) {
         return foodService.getFoodById(id);
     }
 
     @Operation(summary = "음식 저장", description = "새로운 음식을 냉장고에 저장합니다.")
     @PostMapping
-    public String saveFood(@RequestBody Food food) {
+    public String saveFood(@RequestBody FoodFormRequest foodFormRequest) {
+        Food food = new Food(
+                foodFormRequest.getId(),
+                foodFormRequest.getName(),
+                foodFormRequest.getExpiryDate(),
+                foodFormRequest.getPurchaseDate(),
+                foodFormRequest.getPrice()
+        );
+
         foodService.saveFood(food);
         return "Food saved successfully";
     }
