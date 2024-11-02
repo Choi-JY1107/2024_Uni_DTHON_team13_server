@@ -5,7 +5,7 @@ spring:
       import: optional:file:.env[.properties]
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DATABASE_ENDPOINT}:3306//uniD
+    url: jdbc:mysql://${DATABASE_ENDPOINT}:3306/${DATABASE_SCHEME}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 
