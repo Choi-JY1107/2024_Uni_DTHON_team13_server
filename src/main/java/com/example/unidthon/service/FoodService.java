@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.unidthon.dto.FoodRecommendResponse;
 import com.example.unidthon.dto.FoodResponse;
+import com.example.unidthon.dto.OcrRecord;
 import com.example.unidthon.entity.Food;
 import com.example.unidthon.entity.FoodImage;
 import com.example.unidthon.repository.FoodImageRepository;
@@ -76,5 +77,9 @@ public class FoodService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to parse GPT response", e);
         }
+    }
+
+    public void saveFoodByOcrRecords(List<OcrRecord> ocrRecord) {
+        // OCR 결과를 저장하는 로직을 추후 구현 예정
     }
 }

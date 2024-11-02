@@ -37,6 +37,9 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    // ocr
+    implementation 'com.google.cloud:google-cloud-vision:3.34.0'
+
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -49,6 +52,6 @@ dependencies {
     implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.12.172'
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
