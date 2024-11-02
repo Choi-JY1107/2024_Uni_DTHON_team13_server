@@ -10,14 +10,14 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodRequestDto {
+public class FoodResponseDto {
     private String name;
     private LocalDate expiryDate;
     private LocalDate purchaseDate;
     private int price;
     private String imageUrl;
 
-    public FoodRequestDto(String imageUrl, Food food) {
+    public FoodResponseDto(String imageUrl, Food food) {
         this.name = food.getName();
         this.expiryDate = food.getExpiryDate();
         this.purchaseDate = food.getPurchaseDate();

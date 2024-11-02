@@ -1,13 +1,13 @@
 package com.example.unidthon.controller;
 
-import com.example.unidthon.dto.FoodRequestDto;
+import com.example.unidthon.dto.FoodListResponse;
+import com.example.unidthon.dto.FoodResponseDto;
 import com.example.unidthon.entity.Food;
 import com.example.unidthon.service.FoodService;
 
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/food")
@@ -21,13 +21,13 @@ public class FoodController {
 
     // 모든 음식 조회
     @GetMapping
-    public List<Food> getAllFoods() {
+    public List<FoodListResponse> getAllFoods() {
         return foodService.getAllFoods();
     }
 
     // 특정 ID의 음식 조회
     @GetMapping("/{id}")
-    public FoodRequestDto getFoodById(@PathVariable Long id) {
+    public FoodResponseDto getFoodById(@PathVariable Long id) {
         return foodService.getFoodById(id);
     }
 

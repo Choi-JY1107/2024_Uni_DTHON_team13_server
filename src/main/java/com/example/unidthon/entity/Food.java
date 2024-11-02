@@ -1,11 +1,9 @@
 package com.example.unidthon.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -20,8 +18,10 @@ public class Food {
 
     private String name;
 
+    // 유통기한
     private LocalDate expiryDate;
 
+    // 구매날짜
     private LocalDate purchaseDate;
 
     private int price;

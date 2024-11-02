@@ -1,6 +1,7 @@
 package com.example.unidthon.service;
 
-import com.example.unidthon.dto.FoodRequestDto;
+import com.example.unidthon.dto.FoodListResponse;
+import com.example.unidthon.dto.FoodResponseDto;
 import com.example.unidthon.entity.Food;
 import com.example.unidthon.entity.FoodImage;
 import com.example.unidthon.repository.FoodMockRepository;
@@ -9,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,12 +20,15 @@ public class FoodService {
     private final FoodRepository foodRepository;
 
     // 모든 음식 조회
-    public List<Food> getAllFoods() {
-        return foodMockRepository.findAll();
+    public List<FoodListResponse> getAllFoods() {
+        List<Food> foods = foodRepository.findAll();
+        return foods.stream()
+                .map(FoodListResponse::toFoodList)
+                .collect(Collectors.toList());
     }
 
     // ID로 특정 음식 조회
-    public FoodRequestDto getFoodById(Long id) {
+    public FoodResponseDto getFoodById(Long id) {
         Food newFood = foodRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException());
 
@@ -35,7 +39,7 @@ public class FoodService {
         String imageURL = foodImage.getFoodImageURL();
 
         // 응답 객체 반환
-        return new FoodRequestDto(imageURL, newFood);
+        return new FoodResponseDto(imageURL, newFood);
     }
 
     // 음식 저장
