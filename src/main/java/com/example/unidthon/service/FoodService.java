@@ -24,6 +24,7 @@ public class FoodService {
     private final GPTService gptService;
     private final FoodRepository foodRepository;
     private final FoodImageRepository foodImageRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();  // ObjectMapper 인스턴스 생성
 
     // 모든 음식 조회
     public List<FoodResponse> getAllFoods() {
@@ -64,9 +65,36 @@ public class FoodService {
         return false;
     }
 
+    // GPT 추천 레시피 목록 반환
     public List<FoodRecommendResponse> getFoodRecommendations() {
-        String gptResponseJson = gptService.getRecipeRecommendations();
+        List<FoodResponse> foodResponseList = getAllFoods();
+        String userPrompt = createUserPromptJson(foodResponseList);
+        String gptResponseJson = gptService.getRecipeRecommendations(userPrompt);
         return parseGptResponse(gptResponseJson);
+    }
+
+    public String createUserPromptJson(List<FoodResponse> foodResponseList) {
+        StringBuilder jsonBuilder = new StringBuilder();
+
+        jsonBuilder.append("{\"user_prompt\":[");
+
+        for (int i = 0; i < foodResponseList.size(); i++) {
+            FoodResponse food = foodResponseList.get(i);
+
+            jsonBuilder.append("[\"")
+                    .append(food.getName())
+                    .append("\",")
+                    .append(food.getQuantity())  // 예: 수량을 반환하는 getQuantity() 메서드 필요
+                    .append("]");
+
+            if (i < foodResponseList.size() - 1) {
+                jsonBuilder.append(",");
+            }
+        }
+
+        jsonBuilder.append("]}");
+
+        return jsonBuilder.toString();
     }
 
     private List<FoodRecommendResponse> parseGptResponse(String gptResponseJson) {
