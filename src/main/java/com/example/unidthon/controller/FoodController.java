@@ -1,5 +1,6 @@
 package com.example.unidthon.controller;
 
+import com.example.unidthon.dto.FoodRequestDto;
 import com.example.unidthon.entity.Food;
 import com.example.unidthon.service.FoodService;
 
@@ -26,7 +27,7 @@ public class FoodController {
 
     // 특정 ID의 음식 조회
     @GetMapping("/{id}")
-    public Optional<Food> getFoodById(@PathVariable Long id) {
+    public FoodRequestDto getFoodById(@PathVariable Long id) {
         return foodService.getFoodById(id);
     }
 

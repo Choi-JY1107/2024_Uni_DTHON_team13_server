@@ -2,6 +2,8 @@ package com.example.unidthon.repository;
 
 import com.example.unidthon.entity.Food;
 
+import com.example.unidthon.entity.FoodImage;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -32,6 +34,7 @@ public class FoodMockRepository {
                 .filter(food -> food.getId().equals(id))
                 .findFirst();
     }
+
 
     // 음식 저장 (데이터베이스가 아닌 리스트에 추가)
     public void save(Food food) {
