@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.unidthon.dto.FoodFormRequest;
-import com.example.unidthon.dto.FoodListResponse;
 import com.example.unidthon.dto.FoodRecommendResponse;
 import com.example.unidthon.dto.FoodResponse;
 import com.example.unidthon.entity.Food;
@@ -30,7 +29,7 @@ public class FoodController {
 
     @Operation(summary = "모든 음식 조회", description = "냉장고에 있는 모든 음식을 조회합니다.")
     @GetMapping
-    public List<FoodListResponse> getAllFoods() {
+    public List<FoodResponse> getAllFoods() {
         return foodService.getAllFoods();
     }
 

@@ -1,5 +1,7 @@
 package com.example.unidthon.dto;
 
+import java.time.LocalDate;
+
 import com.example.unidthon.entity.Food;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,12 +9,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class FoodResponse {
+
+    @Schema(description = "음식 ID", example = "1")
+    private Long id;
 
     @Schema(description = "음식 이름", example = "Apple")
     private String name;
