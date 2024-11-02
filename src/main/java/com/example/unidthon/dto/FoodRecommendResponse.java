@@ -37,4 +37,8 @@ public class FoodRecommendResponse {
     @Schema(description = "사진 URL", example = "https://example.com/kimchi_fried_rice.jpg")
     @JsonProperty("ImageUrl")
     private String imageUrl;
+
+    @Schema(description = "소매가", example = "10000")
+    @JsonProperty("Price")
+    private Integer price;
 }
