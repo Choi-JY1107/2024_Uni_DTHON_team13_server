@@ -1,28 +1,39 @@
 package com.example.unidthon.service;
 
+import com.example.unidthon.entity.Food;
+import com.example.unidthon.repository.FoodMockRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FoodService {
 
-    public String getAllFoods() {
-        // 예시로 간단하게 문자열 반환
-        return "All Foods";
+    private final FoodMockRepository foodRepository;
+
+    // 생성자에서 FoodMockRepository 의존성 주입
+    public FoodService(FoodMockRepository foodRepository) {
+        this.foodRepository = foodRepository;
     }
 
-    public String getFoodById(Long id) {
-        return "Food with ID: " + id;
+    // 모든 음식 조회
+    public List<Food> getAllFoods() {
+        return foodRepository.findAll();
     }
 
-    public String saveFood() {
-        return "Food saved";
+    // ID로 특정 음식 조회
+    public Optional<Food> getFoodById(Long id) {
+        return foodRepository.findById(id);
     }
 
-    public String searchFoodByOCR() {
-        return "Food found by OCR";
+    // 음식 저장
+    public void saveFood(Food food) {
+        foodRepository.save(food);
     }
 
-    public String recommendFood() {
-        return "Food recommendation";
+    // ID로 특정 음식 삭제
+    public boolean deleteFoodById(Long id) {
+        return foodRepository.deleteById(id);
     }
 }
