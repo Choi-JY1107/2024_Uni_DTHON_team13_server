@@ -1,13 +1,23 @@
 package com.example.unidthon.controller;
 
-import com.example.unidthon.dto.FoodListResponse;
-import com.example.unidthon.dto.FoodResponseDto;
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.unidthon.dto.FoodFormRequest;
+import com.example.unidthon.dto.FoodRecommendResponse;
+import com.example.unidthon.dto.FoodResponse;
 import com.example.unidthon.entity.Food;
 import com.example.unidthon.service.FoodService;
 
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/food")
@@ -19,35 +29,44 @@ public class FoodController {
         this.foodService = foodService;
     }
 
-    // 모든 음식 조회
+    @Operation(summary = "모든 음식 조회", description = "냉장고에 있는 모든 음식을 조회합니다.")
     @GetMapping
-    public List<FoodListResponse> getAllFoods() {
+    public List<FoodResponse> getAllFoods() {
         return foodService.getAllFoods();
     }
 
-    // 특정 ID의 음식 조회
+    @Operation(summary = "특정 ID의 음식 조회", description = "특정 ID에 해당하는 음식을 조회합니다.")
     @GetMapping("/{id}")
-    public FoodResponseDto getFoodById(@PathVariable Long id) {
+    public FoodResponse getFoodById(@PathVariable Long id) {
         return foodService.getFoodById(id);
     }
 
-    // 음식 저장
+    @Operation(summary = "음식 저장", description = "새로운 음식을 냉장고에 저장합니다.")
     @PostMapping
-    public String saveFood(@RequestBody Food food) {
-        foodService.saveFood(food);
-        return "Food saved successfully";
+    public ResponseEntity<Long> saveFood(@RequestBody FoodFormRequest foodFormRequest) {
+        Food food = new Food(
+                null,
+                foodFormRequest.getName(),
+                foodFormRequest.getExpiryDate(),
+                foodFormRequest.getPurchaseDate(),
+                foodFormRequest.getPrice()
+        );
+        Long savedFoodId = foodService.saveFood(food);
+
+        // Location 헤더 설정
+        URI location = URI.create("/food/" + savedFoodId);
+        return ResponseEntity.created(location).body(savedFoodId);
     }
 
-    // 음식 추천 요청
-    @GetMapping("/recommend")
-    public String recommendFood() {
-        // 추천 기능을 나중에 구현할 수 있도록 임시 메시지 반환
-        return "Food recommendation feature not implemented yet";
-    }
-
-    // OCR 검색 기능 (임시 메시지 반환)
+    @Operation(summary = "OCR을 통한 음식 검색", description = "OCR 기능을 통해 음식을 검색합니다.")
     @PostMapping("/search/ocr")
     public String searchFoodByOCR() {
         return "OCR search feature not implemented yet";
+    }
+
+    @Operation(summary = "오늘 저녁 추천", description = "냉장고에 있는 재료를 이용해 GPT가 추천한 레시피 목록을 반환합니다.")
+    @GetMapping("/recommend")
+    public List<FoodRecommendResponse> getFoodRecommendations() {
+        return foodService.getFoodRecommendations();
     }
 }
