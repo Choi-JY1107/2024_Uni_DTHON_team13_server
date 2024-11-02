@@ -1,11 +1,15 @@
 package com.example.unidthon.dto;
 
 import com.example.unidthon.entity.Food;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Builder
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class FoodListResponse {
     private String name;
     private LocalDate expiryDate;
@@ -13,13 +17,11 @@ public class FoodListResponse {
     private int price;
     private String imageUrl;
 
-    public static FoodListResponse toFoodList(Food food) {
-        return FoodListResponse.builder()
-                .name(food.getName())
-                .expiryDate(food.getExpiryDate())
-                .purchaseDate(food.getPurchaseDate())
-                .price(food.getPrice())
-                .imageUrl(food.getFoodImage() != null ? food.getFoodImage().getFoodImageURL() : null)
-                .build();
+    public FoodListResponse(Food food) {
+        this.name = food.getName();
+        this.expiryDate = food.getExpiryDate();
+        this.purchaseDate = food.getPurchaseDate();
+        this.price = food.getPrice();
+        this.imageUrl = food.getFoodImage() != null ? food.getFoodImage().getFoodImageURL() : null;
     }
 }

@@ -23,26 +23,27 @@ public class FoodService {
 
     // 모든 음식 조회
     public List<FoodListResponse> getAllFoods() {
-        List<Food> foods = foodRepository.findAll();
+        List<Food> foods = foodMockRepository.findAll();
         return foods.stream()
-                .map(FoodListResponse::toFoodList)
-                .collect(Collectors.toList());
+                .map(FoodListResponse::new)
+                .toList();
     }
+
 
     // ID로 특정 음식 조회
     public FoodResponseDto getFoodById(Long id) {
-        Food newFood = foodRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException());
 
-        // food id로 이미지 조회
-        FoodImage foodImage = foodImageRepository.findByFood(foodRepository.findById(id).orElseThrow(() -> new IllegalArgumentException()))
-                .orElseThrow(() -> new IllegalArgumentException());
-        // imageURL 저장
-        String imageURL = foodImage.getFoodImageURL();
+        Food food = foodMockRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("음식을 찾지 못했습니다. " + id));
 
-        // 응답 객체 반환
-        return new FoodResponseDto(imageURL, newFood);
+        FoodImage foodImage = foodImageRepository.findByFood(food)
+                .orElse(null);
+
+        String imageUrl = foodImage != null ? foodImage.getFoodImageURL() : null;
+
+        return new FoodResponseDto(food.getName(), food.getExpiryDate(), food.getPurchaseDate(), food.getPrice(), imageUrl);
     }
+
 
     // 음식 저장
     public void saveFood(Food food) {
