@@ -49,9 +49,9 @@ public class FoodService {
                 food.getPrice(), imageUrl);
     }
 
-    // 음식 저장
-    public void saveFood(Food food) {
-        foodRepository.save(food);
+    public Long saveFood(Food food) {
+        Food savedFood = foodRepository.save(food);
+        return savedFood.getId();
     }
 
     // ID로 특정 음식 삭제

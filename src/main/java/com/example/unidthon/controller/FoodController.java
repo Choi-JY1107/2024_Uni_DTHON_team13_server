@@ -1,7 +1,9 @@
 package com.example.unidthon.controller;
 
+import java.net.URI;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +43,7 @@ public class FoodController {
 
     @Operation(summary = "음식 저장", description = "새로운 음식을 냉장고에 저장합니다.")
     @PostMapping
-    public String saveFood(@RequestBody FoodFormRequest foodFormRequest) {
+    public ResponseEntity<Long> saveFood(@RequestBody FoodFormRequest foodFormRequest) {
         Food food = new Food(
                 null,
                 foodFormRequest.getName(),
@@ -49,9 +51,11 @@ public class FoodController {
                 foodFormRequest.getPurchaseDate(),
                 foodFormRequest.getPrice()
         );
+        Long savedFoodId = foodService.saveFood(food);
 
-        foodService.saveFood(food);
-        return "Food saved successfully";
+        // Location 헤더 설정
+        URI location = URI.create("/food/" + savedFoodId);
+        return ResponseEntity.created(location).body(savedFoodId);
     }
 
     @Operation(summary = "OCR을 통한 음식 검색", description = "OCR 기능을 통해 음식을 검색합니다.")
