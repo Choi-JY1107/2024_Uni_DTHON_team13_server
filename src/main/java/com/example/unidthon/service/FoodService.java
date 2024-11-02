@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.unidthon.dto.FoodListResponse;
 import com.example.unidthon.dto.FoodRecommendResponse;
 import com.example.unidthon.dto.FoodResponse;
 import com.example.unidthon.entity.Food;
@@ -26,9 +25,16 @@ public class FoodService {
     private final FoodImageRepository foodImageRepository;
 
     // 모든 음식 조회
-    public List<FoodListResponse> getAllFoods() {
+    public List<FoodResponse> getAllFoods() {
         List<Food> foods = foodRepository.findAll();
-        return foods.stream().map(FoodListResponse::new).toList();
+        return foods.stream()
+                .map(food -> {
+                    FoodImage foodImage = foodImageRepository.findByFood(food).orElse(null);
+                    String imageUrl = foodImage != null ? foodImage.getFoodImageURL() : null;
+                    return new FoodResponse(food.getId(), food.getName(), food.getExpiryDate(),
+                            food.getPurchaseDate(), food.getPrice(), imageUrl);
+                })
+                .toList();
     }
 
     // ID로 특정 음식 조회
@@ -39,8 +45,8 @@ public class FoodService {
         FoodImage foodImage = foodImageRepository.findByFood(food).orElse(null);
         String imageUrl = foodImage != null ? foodImage.getFoodImageURL() : null;
 
-        return new FoodResponse(food.getName(), food.getExpiryDate(), food.getPurchaseDate(), food.getPrice(),
-                imageUrl);
+        return new FoodResponse(food.getId(), food.getName(), food.getExpiryDate(), food.getPurchaseDate(),
+                food.getPrice(), imageUrl);
     }
 
     // 음식 저장
