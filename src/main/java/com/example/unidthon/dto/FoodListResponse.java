@@ -1,20 +1,21 @@
 package com.example.unidthon.dto;
 
+import java.time.LocalDate;
+
 import com.example.unidthon.entity.Food;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Getter;
-
-import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class FoodListResponse {
+
+    @Schema(description = "음식 ID", example = "1")
+    private Long id;
 
     @Schema(description = "음식 이름", example = "Apple")
     private String name;
@@ -32,6 +33,7 @@ public class FoodListResponse {
     private String imageUrl;
 
     public FoodListResponse(Food food) {
+        this.id = food.getId();
         this.name = food.getName();
         this.expiryDate = food.getExpiryDate();
         this.purchaseDate = food.getPurchaseDate();
