@@ -39,4 +39,9 @@ public class FoodResponse {
         this.price = food.getPrice();
         this.imageUrl = imageUrl;
     }
+
+    public int getQuantity() {
+        // 예시: 수량을 반환하는 메서드 (필요에 따라 구현)
+        return 10; // 실제 수량 로직으로 대체 필요
+    }
 }
